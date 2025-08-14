@@ -5,6 +5,7 @@ import PasswordInput from "../common/PasswordInput";
 import styles from "./Signup.module.css";
 
 const BIO_MAX = 200;
+const BIO_MIN = 50;
 
 const Signup = () => {
   const actionData = useActionData(); 
