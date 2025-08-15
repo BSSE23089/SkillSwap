@@ -5,7 +5,17 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(69, 69, 237);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark theme global styles */
+[data-theme="dark"] body {
+  background-color: #0F1624;
+  color: #fff;
+}
+
+[data-theme="dark"] html {
+  background-color: #0F1624;
 }
 
 code {
