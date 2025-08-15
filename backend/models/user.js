@@ -4,7 +4,7 @@ const userSchema = new Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   passwordHash: { type: String, required: true },
-  bio: String,
+  bio: {type :String,required:true},
   location: String,
   avatarUrl: String,
   role: [{ type: String, enum: ["learner", "teacher", "dual"] , required : true}],

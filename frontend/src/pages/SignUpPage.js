@@ -1,8 +1,13 @@
 import SignUpForm from "../components/Authentication/Signup";
+import FormPageBackground from "../components/FormPageBackground";
 import { redirect } from "react-router-dom";
 
 function SignUpPage() {
-  return <SignUpForm />;
+  return (
+    <FormPageBackground>
+      <SignUpForm />
+    </FormPageBackground>
+  );
 }
 
 export default SignUpPage;
@@ -25,18 +30,18 @@ export async function action({ request }) {
 
     // Handle server-side validation errors (if any)
     if (response.status === 422) {
-      return response;
+      const data = await response.json();
+      return { error: data?.error || "Signup failed. Please check your details." };
     }
 
     if (!response.ok) {
-      throw new Error("Could not register user");
+      return { error: "Could not register user. Please try again." };
     }
 
     // If successful, redirect to login page
-    return redirect("/login");
+    return redirect("/login?signup=success");
   } catch (error) {
     console.error("Signup error:", error);
-    // You can return some error response or show a message in your form
-    return null;
+    return { error: "Signup failed. Please try again later." };
   }
 }

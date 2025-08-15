@@ -1,14 +1,20 @@
 import LoginForm from "../components/Authentication/Login";
+import FormPageBackground from "../components/FormPageBackground";
 import { redirect } from "react-router-dom";
 
 function LoginPage() {
-  return <LoginForm />;
+  return (
+    <FormPageBackground>
+      <LoginForm />
+    </FormPageBackground>
+  );
 }
 
 export default LoginPage;
 
 export async function action({ request }) {
   const formData = await request.formData();
+
   const email = formData.get("email");
   const password = formData.get("password");
 
@@ -21,24 +27,18 @@ export async function action({ request }) {
 
     // Handle server-side validation errors
     if (response.status === 422) {
-      return response;
+      const data = await response.json();
+      return { error: data?.error || "Login failed. Please check your credentials." };
     }
 
     if (!response.ok) {
-      throw new Error("Could not authenticate user");
+      return { error: "Could not authenticate user. Please try again." };
     }
 
-    // Optionally, get the token from the response
-    const data = await response.json();
-    console.log("Login successful, token:", data.token);
-    // You can store token in localStorage or context here if needed
-    // localStorage.setItem("token", data.token);
-
-    // Redirect to dashboard on successful login
-    return redirect("/dashboard");
+    // Return a success message instead of redirecting immediately
+    return { success: "Login successful!" };
   } catch (error) {
     console.error("Login error:", error);
-    // Return null or handle error display in your form
-    return null;
+    return { error: "Login failed. Please try again later." };
   }
 }

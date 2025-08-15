@@ -1,0 +1,73 @@
+.authBg {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #E8F0FF;
+}
+
+.leftContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 10vw;
+}
+
+.heading {
+  font-size: 4.2rem;
+  font-weight: 750;
+  color: #222;
+  margin-bottom: 18px;
+  line-height: 1.08;
+}
+
+.highlight {
+  color: #598bff;
+  font-size: 4.2rem;
+  font-weight: 750;
+}
+
+.description {
+  font-size: 1.35rem;
+  color: #6b7280;
+  max-width: 600px;
+  margin-bottom: 36px;
+}
+
+.buttonRow {
+  display: flex;
+  gap: 18px;
+}
+
+.getStarted {
+  background: #598bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 16px 36px;
+  font-weight: 700;
+  font-size: 1.15rem;
+  cursor: pointer;
+}
+
+.learnMore {
+  background: #fff;
+  color: #939ee1;
+  border: 1px solid #dbeafe;
+  border-radius: 8px;
+  padding: 16px 36px;
+  font-weight: 700;
+  font-size: 1.15rem;
+  cursor: pointer;
+}
+
+.rightContent {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 100vh;
+  margin-left: 0;
+}

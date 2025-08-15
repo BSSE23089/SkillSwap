@@ -1,11 +1,16 @@
 import React from "react";
-import { Form, Link } from "react-router-dom";
+import { Form, Link, useLocation } from "react-router-dom";
 import { useFormik } from "formik";
 import { Mail } from "lucide-react";
 import PasswordInput from "../common/PasswordInput";
 import classes from "./Login.module.css";
+import Prompt from "../../UI/Prompt";
+import { useActionData } from "react-router-dom";
 
 const LoginForm = () => {
+  const actionData = useActionData();
+  const location = useLocation();
+  const [prompt, setPrompt] = React.useState({ message: "", type: "info" });
   const formik = useFormik({
     initialValues: { email: "", password: "" },
     validate: (values) => {
@@ -19,8 +24,28 @@ const LoginForm = () => {
         }
       return errors;
     },
-    onSubmit: () => {} // React Router handles the real submission
+    onSubmit: () => {}, // Let React Router handle the real submit
   });
+
+  React.useEffect(() => {
+    // Show prompt if redirected from signup
+    const params = new URLSearchParams(location.search);
+    if (params.get("signup") === "success") {
+      setPrompt({ message: "Signup successful! Please log in.", type: "success" });
+    }
+  }, [location.search]);
+
+  React.useEffect(() => {
+    if (actionData) {
+      if (actionData.error) {
+        setPrompt({ message: actionData.error, type: "error" });
+      } else if (actionData.success) {
+        setPrompt({ message: actionData.success, type: "success" });
+      } else {
+        setPrompt({ message: "", type: "info" });
+      }
+    }
+  }, [actionData]);
 
   return (
     <div className={classes.page}>
@@ -32,8 +57,19 @@ const LoginForm = () => {
             Welcome back! Sign in to continue your learning journey
           </p>
         </div>
+        <Prompt type={prompt.type} message={prompt.message} onClose={() => setPrompt({ message: "", type: "info" })} />
 
-        <Form method="POST" className={classes.form}>
+        <Form method="POST" className={classes.form}
+          onSubmit={e => {
+            const errors = formik.validateForm();
+            Promise.resolve(errors).then(errObj => {
+              if (Object.keys(errObj).length > 0) {
+                e.preventDefault();
+                formik.setTouched({ email: true, password: true });
+              }
+            });
+          }}
+        >
           <div className={classes.control}>
             <label className={classes.label}>Email Address</label>
             <div className={classes.inputWrapper}>
