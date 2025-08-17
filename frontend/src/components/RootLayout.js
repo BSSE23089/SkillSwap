@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import MainNavbar from "./MainNavbar";
+import MainNavbar from "./common/MainNavbar";
 import { Outlet } from "react-router-dom";
 
 const RootLayout = () => {
@@ -10,7 +10,9 @@ const RootLayout = () => {
     // TODO: Replace with real user fetch
     // Example: fetch('/api/user/me').then(res => res.json()).then(user => setTheme(user.themePreference));
     const storedTheme = localStorage.getItem("theme");
-    if (storedTheme) setTheme(storedTheme);
+    if (storedTheme) {
+      setTheme(storedTheme);
+    }
   }, []);
 
   const handleToggleTheme = () => {

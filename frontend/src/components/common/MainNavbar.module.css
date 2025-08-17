@@ -31,6 +31,7 @@
   gap: 8px;
   font-weight: 700;
   font-size: 1.3rem;
+  
 }
 
 .logoIcon {
@@ -44,6 +45,7 @@
   justify-content: center;
   font-weight: 800;
   font-size: 1.1rem;
+  text-decoration: none;
 }
 
 .logoText {
@@ -52,6 +54,7 @@
   font-size: 1.2rem;
   letter-spacing: 0.5px;
   transition: color 0.3s ease;
+   text-decoration: none;
 }
 
 /* Dark theme logo text */

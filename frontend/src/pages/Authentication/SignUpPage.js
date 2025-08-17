@@ -1,5 +1,5 @@
-import SignUpForm from "../components/Authentication/Signup";
-import FormPageBackground from "../components/FormPageBackground";
+import SignUpForm from "../../components/Authentication/Signup";
+import FormPageBackground from "../../components/Authentication/FormPageBackground";
 import { redirect } from "react-router-dom";
 
 function SignUpPage() {

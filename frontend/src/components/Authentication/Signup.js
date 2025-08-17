@@ -1,7 +1,7 @@
 import { Form, useActionData, useNavigation, Link } from "react-router-dom";
 import { useFormik } from "formik";
 import { User, Mail, FileText, UserCheck } from "lucide-react";
-import PasswordInput from "../common/PasswordInput";
+import PasswordInput from "./PasswordInput";
 import styles from "./Signup.module.css";
 import Prompt from "../../UI/Prompt";
 import React from "react";
@@ -13,7 +13,8 @@ const Signup = () => {
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
   const [prompt, setPrompt] = React.useState({ message: "", type: "info" });
-
+ 
+  
   React.useEffect(() => {
     if (actionData) {
       if (actionData.error) {

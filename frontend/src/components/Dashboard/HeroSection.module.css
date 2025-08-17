@@ -1,23 +1,12 @@
-.dashboardBg {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #f5f8ff 0%, #e8f0ff 100%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: background 0.3s ease;
-}
-
-/* Dark theme styles */
-[data-theme="dark"] .dashboardBg {
-  background: #0F1624;
-}
-
 .heroWrapper {
   margin-top: 64px;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
+  max-width: 100vw;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
 .announcement {
@@ -45,14 +34,12 @@
   font-weight: 800;
   text-align: center;
   margin-bottom: 12px;
-  line-height: 1.08;
+  line-height: 1.15;
 }
 
 .blue {
   color: #598bff;
 }
-
-/* Dark theme blue text */
 [data-theme="dark"] .blue {
   color: #6791E4;
 }
@@ -60,8 +47,6 @@
 .black {
   color: #222;
 }
-
-/* Dark theme black text */
 [data-theme="dark"] .black {
   color: #fff;
 }
@@ -74,8 +59,6 @@
   margin-bottom: 32px;
   transition: color 0.3s ease;
 }
-
-/* Dark theme hero description */
 [data-theme="dark"] .heroDesc {
   color: #a0a0a0;
 }
@@ -98,13 +81,10 @@
   box-shadow: 0 2px 8px rgba(80, 120, 200, 0.08);
   transition: background 0.2s;
 }
-
-/* Dark theme start learning button */
 [data-theme="dark"] .startLearning {
   background: #6791E4;
   color: #fff;
 }
-
 [data-theme="dark"] .startLearning:hover {
   background: #5a7fd8;
 }
@@ -120,77 +100,16 @@
   cursor: pointer;
   transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
-
-/* Dark theme share skills button */
 [data-theme="dark"] .shareSkills {
   background: transparent;
   color: #6791E4;
   border: 1px solid #6791E4;
 }
-
 .shareSkills:hover {
   background: #f0f6ff;
   color: #233ff3;
 }
-
-/* Dark theme share skills button hover */
 [data-theme="dark"] .shareSkills:hover {
-  background: #6791E4;
+  background: #9dbaf6;
   color: #fff;
-}
-
-.statsRow {
-  display: flex;
-  gap: 48px;
-  margin-top: 32px;
-}
-
-.statBox {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.statIcon {
-  width: 48px;
-  height: 48px;
-  background: #E5EDFE;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 16px;
-  color: #427DF0;
-  transition: all 0.3s ease;
-}
-
-/* Dark theme stat icon */
-[data-theme="dark"] .statIcon {
-  background: #1a2332;
-  color: #6791E4;
-}
-
-.statValue {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: black;
-  margin-bottom: 2px;
-  transition: color 0.3s ease;
-}
-
-/* Dark theme stat values */
-[data-theme="dark"] .statValue {
-  color: #6791E4;
-}
-
-.statLabel {
-  font-size: 1.1rem;
-  color: #6b7280;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-/* Dark theme stat labels */
-[data-theme="dark"] .statLabel {
-  color: #a0a0a0;
 }

@@ -11,5 +11,11 @@ router.post("/login", userController.login);
 router.get("/profile", userController.verifyToken, (req, res) => {
   res.json({ message: "Welcome to your profile!", user: req.user });
 });
+// userRoutes.js
+router.post("/logout", (req, res) => {
+  res.clearCookie("token", { httpOnly: true, sameSite: "none", secure: false });
+  res.json({ success: true, message: "Logged out successfully" });
+});
+
 
 module.exports = router;

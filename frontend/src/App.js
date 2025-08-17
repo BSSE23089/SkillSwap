@@ -1,10 +1,12 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import SignUpPage, { action as signupAction } from "./pages/SignUpPage";
-import LoginPage, { action as loginAction } from "./pages/LoginPage";
+import SignUpPage, { action as signupAction } from "./pages/Authentication/SignUpPage";
+import LoginPage, { action as loginAction } from "./pages/Authentication/LoginPage";
 import RootLayout from "./components/RootLayout";
-import DashboardHome from "./pages/DashboardHome";
-import Discover from "./pages/Discover";
-import PostSkill from "./pages/PostSkill";
+import DashboardHome from "./pages/Dashboard/DashboardHome";
+import Discover from "./pages/Discover/Discover";
+import PostSkill from "./pages/PostSkill/PostSkill";
+import ProfilePage from "./pages/Profile/ProfilePage"; 
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
   const router = createBrowserRouter([
@@ -15,12 +17,18 @@ function App() {
         { index: true, element: <DashboardHome /> },
         { path: "discover", element: <Discover /> },
         { path: "postSkill", element: <PostSkill /> },
+        { path: "mySkills", element: <ProfilePage /> }, 
       ],
     },
     { path: "/", element: <SignUpPage />, action: signupAction },
     { path: "/login", element: <LoginPage />, action: loginAction },
   ]);
-  return <RouterProvider router={router} />;
+
+  return (
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  );
 }
 
 export default App;
