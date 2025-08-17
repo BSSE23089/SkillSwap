@@ -1,49 +1,40 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
-const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const userRoutes = require("./routes/userRoutes");
-
+const statsRoutes = require("./routes/statsRoutes");
 dotenv.config();
 
 const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// ✅ Define allowed origins
-const allowedOrigins = [
-  "http://localhost:3000",   // React frontend
-  "http://www.contoso.com"   // Example additional origin
-];
+// ✅ Custom CORS middleware
+const allowedOrigins = ["http://localhost:3000"]; // Add your frontend origins here
 
-// ✅ CORS middleware with specific origins
-app.use(cors({
-  origin: function(origin, callback) {
-    // allow requests with no origin (like mobile apps or curl)
-    if (!origin) {
-      return callback(null, true);
-    }
+app.use((req, res, next) => {
+  const {origin} = req.headers;
+  if (allowedOrigins.includes(origin)) {
+    res.header("Access-Control-Allow-Origin", origin);
+  }
 
-    if (allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true, // allow cookies
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.header("Access-Control-Allow-Credentials", "true"); // allow cookies
 
-// ✅ Handle preflight requests
-app.options("*", cors());
+  if (req.method === "OPTIONS") {
+    return res.status(200).end(); // handle preflight requests
+  }
+
+  next();
+});
 
 // Routes
 app.use("/api/users", userRoutes);
+app.use("/api/stats", statsRoutes);
 
 // MongoDB
 mongoose.connect(process.env.MONGO_URI)

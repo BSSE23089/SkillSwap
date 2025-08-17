@@ -20,13 +20,13 @@ const MainNavbar = ({ theme, onToggleTheme }) => {
           <Link to='/dashboard' className={styles.logoIcon}>SS</Link>
           <Link to='/dashboard' className={styles.logoText}>SkillSwap</Link>
         </div>
-        {user && (
+        {user ? (
           <ul className={styles.navLinks}>
             <li><Link to="/dashboard/discover">Discover</Link></li>
             <li><Link to="/dashboard/postSkill">+ Post Skill</Link></li>
             <li><Link to="/dashboard/mySkills">My Skills</Link></li>
           </ul>
-        )}
+        ):(null)}
       </div>
 
       <div className={styles.right}>

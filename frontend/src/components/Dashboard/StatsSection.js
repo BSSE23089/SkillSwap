@@ -6,10 +6,19 @@ const StatsSection = () => {
   const [stats, setStats] = useState({ users: 0, skills: 0, connections: 0 });
 
   useEffect(() => {
-    fetch("/api/dashboard/stats")
+    fetch("http://localhost:5000/api/stats") // backend endpoint
       .then(res => res.json())
-      .then(data => setStats(data))
-      .catch(() => setStats({ users: 500, skills: 1200, connections: 800 }));
+      .then(data => {
+        setStats({
+          users: data.totalUsers || 0,
+          skills: data.totalSkills || 0,
+          connections: data.totalConnections || 0,
+        });
+      })
+      .catch(() => {
+        // fallback values
+        setStats({ users: 500, skills: 1200, connections: 800 });
+      });
   }, []);
 
   return (
