@@ -1,0 +1,92 @@
+.card {
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding: 24px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.badge {
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.teachingBadge {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.learningBadge {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.description {
+  color: #4b5563;
+  margin-bottom: 16px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.tag {
+  padding: 4px 12px;
+  background-color: #f3f4f6;
+  color: #374151;
+  border-radius: 9999px;
+  font-size: 14px;
+}
+
+.metadata {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 16px;
+}
+
+.metadataLeft {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.metadataItem {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.requestBtn {
+  width: 100%;
+  background-color: #f9fafb;
+  color: #374151;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.requestBtn:hover {
+  background-color: #f3f4f6;
+}
