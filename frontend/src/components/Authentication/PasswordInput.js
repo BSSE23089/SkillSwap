@@ -45,7 +45,7 @@ const PasswordInput = ({
           alignItems: "center"
         }}
       >
-        {isVisible ? <EyeOff size={18} /> : <Eye size={18} />}
+        {isVisible ? <Eye size={18} /> : <EyeOff size={18} />}
       </button>
     </div>
   );

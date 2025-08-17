@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styles from "./Prompt.module.css";
 
 const Prompt = ({ type = "info", message, onClose }) => {
@@ -18,10 +17,5 @@ const Prompt = ({ type = "info", message, onClose }) => {
   );
 };
 
-Prompt.propTypes = {
-  type: PropTypes.oneOf(["success", "error", "info"]),
-  message: PropTypes.string,
-  onClose: PropTypes.func,
-};
 
 export default Prompt;

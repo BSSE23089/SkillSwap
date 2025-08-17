@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  background-color: #f3f4f6;
+  border-radius: 20px;
+  padding: 4px;
+  margin-bottom: 24px;
+}
+
+.tab {
+  flex: 1;
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.tabActive {
+  background-color: white;
+  color: #111827;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.tabInactive {
+  color: #6b7280;
+}
+
+.tabInactive:hover {
+  color: #374151;
+}
