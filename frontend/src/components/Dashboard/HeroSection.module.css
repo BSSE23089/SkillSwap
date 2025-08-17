@@ -78,6 +78,7 @@
   font-weight: 700;
   font-size: 1.1rem;
   cursor: pointer;
+  text-decoration: none;
   box-shadow: 0 2px 8px rgba(80, 120, 200, 0.08);
   transition: background 0.2s;
 }
@@ -98,6 +99,7 @@
   font-weight: 700;
   font-size: 1.1rem;
   cursor: pointer;
+  text-decoration: none;
   transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
 [data-theme="dark"] .shareSkills {
