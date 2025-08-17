@@ -1,26 +1,68 @@
-import React from "react";
-import { Form, Link } from "react-router-dom";
+// LoginForm.jsx
+import { useState, useEffect } from "react";
+import { Form, Link, useLocation, useNavigate, useActionData } from "react-router-dom";
 import { useFormik } from "formik";
 import { Mail } from "lucide-react";
-import PasswordInput from "../common/PasswordInput";
+import PasswordInput from "./PasswordInput";
 import classes from "./Login.module.css";
+import Prompt from "../../UI/Prompt";
+import { useAuth } from "../../context/AuthContext"; // Auth hook
 
 const LoginForm = () => {
+  const actionData = useActionData();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { login } = useAuth();
+
+  const [prompt, setPrompt] = useState({ message: "", type: "info" });
+
+  // ✅ Handle successful login
+  useEffect(() => {
+    if (actionData?.success && actionData?.user) {
+      // Only store user in AuthContext
+      login(actionData.user);
+
+      // Redirect to dashboard after short delay
+      const timer = setTimeout(() => navigate("/dashboard"), 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [actionData, navigate, login]);
+
   const formik = useFormik({
     initialValues: { email: "", password: "" },
     validate: (values) => {
       const errors = {};
-      if (!values.email) {errors.email = "Email is required";}
-      else if (!/\S+@\S+\.\S+/.test(values.email))
-        {errors.email = "Invalid email address"};
-
-      if (!values.password) {errors.password = "Password is required";
-
-        }
+      if (!values.email) {
+        errors.email = "Email is required";
+      } else if (!/\S+@\S+\.\S+/.test(values.email)) {
+        errors.email = "Invalid email address";
+      }
+      if (!values.password) {
+        errors.password = "Password is required";
+      }
       return errors;
     },
-    onSubmit: () => {} // React Router handles the real submission
+    onSubmit: () => {}, // handled by React Router action
   });
+
+  // Show "Signup success" if redirected from signup page
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get("signup") === "success") {
+      setPrompt({ message: "Signup successful! Please log in.", type: "success" });
+    }
+  }, [location.search]);
+
+  // Show errors or success messages from action
+  useEffect(() => {
+    if (actionData) {
+      if (actionData.error) {
+        setPrompt({ message: actionData.error, type: "error" });
+      } else if (actionData.message) {
+        setPrompt({ message: actionData.message, type: "success" });
+      }
+    }
+  }, [actionData]);
 
   return (
     <div className={classes.page}>
@@ -33,7 +75,26 @@ const LoginForm = () => {
           </p>
         </div>
 
-        <Form method="POST" className={classes.form}>
+        <Prompt
+          type={prompt.type}
+          message={prompt.message}
+          onClose={() => setPrompt({ message: "", type: "info" })}
+        />
+
+        <Form
+          method="POST"
+          className={classes.form}
+          onSubmit={(e) => {
+            const errors = formik.validateForm();
+            Promise.resolve(errors).then((errObj) => {
+              if (Object.keys(errObj).length > 0) {
+                e.preventDefault();
+                formik.setTouched({ email: true, password: true });
+              }
+            });
+          }}
+        >
+          {/* Email */}
           <div className={classes.control}>
             <label className={classes.label}>Email Address</label>
             <div className={classes.inputWrapper}>
@@ -54,6 +115,7 @@ const LoginForm = () => {
             )}
           </div>
 
+          {/* Password */}
           <div className={classes.control}>
             <label className={classes.label}>Password</label>
             <PasswordInput
@@ -72,12 +134,15 @@ const LoginForm = () => {
             )}
           </div>
 
+          {/* Remember / Forgot */}
           <div className={classes.row}>
             <label className={classes.remember}>
               <input type="checkbox" name="remember" />
               Remember me
             </label>
-            <a className={classes.forgotLink} href="/">Forgot password?</a>
+            <a className={classes.forgotLink} href="/">
+              Forgot password?
+            </a>
           </div>
 
           <button
@@ -92,10 +157,12 @@ const LoginForm = () => {
             <span className={classes.dividerText}>or continue with</span>
           </div>
 
-          
           <div className={classes.footer}>
             Don't have an account?
-            <Link to="/" className={classes.signupLink}> Sign up</Link>
+            <Link to="/" className={classes.signupLink}>
+              {" "}
+              Sign up
+            </Link>
           </div>
         </Form>
       </div>

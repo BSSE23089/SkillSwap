@@ -1,0 +1,166 @@
+.navbar {
+  width: 100%;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(80, 120, 200, 0.04);
+  padding: 0 40px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Dark theme navbar */
+[data-theme="dark"] .navbar {
+  background: #0C121D;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 1.3rem;
+  
+}
+
+.logoIcon {
+  background: linear-gradient(180deg, #6aa9ff 0%, #4F83EF);
+  color: #fff;
+  border-radius: 12px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.1rem;
+  text-decoration: none;
+}
+
+.logoText {
+  color: #4F83EF;
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease;
+   text-decoration: none;
+}
+
+/* Dark theme logo text */
+[data-theme="dark"] .logoText {
+  color: #6791E4;
+}
+
+.navLinks {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navLinks a {
+  color: #222;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.05rem;
+  transition: color 0.2s;
+}
+
+/* Dark theme nav links */
+[data-theme="dark"] .navLinks a {
+  color: #fff;
+}
+
+.navLinks a:hover {
+  color: #598bff;
+}
+
+/* Dark theme nav links hover */
+[data-theme="dark"] .navLinks a:hover {
+  color: #6791E4;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.themeBtn {
+  background: #f3f6fd;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  padding: 7px 12px;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.loginBtn {
+  background: #fff;
+  color: #222;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 7px 18px;
+  font-weight: 500;
+  font-size: 1rem;
+  text-decoration: none;
+  margin-right: 4px;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+/* Dark theme login button */
+[data-theme="dark"] .loginBtn {
+  background: transparent;
+  color: #fff;
+  border: 1px solid #6791E4;
+}
+
+.loginBtn:hover {
+  background: #f3f6fd;
+  color: #3b5fff;
+}
+
+/* Dark theme login button hover */
+[data-theme="dark"] .loginBtn:hover {
+  background: #6791E4;
+  color: #fff;
+}
+
+.signupBtn {
+  background: #3b5fff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 7px 18px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+/* Dark theme signup button */
+[data-theme="dark"] .signupBtn {
+  background: #6791E4;
+}
+
+.signupBtn:hover {
+  background: #598bff;
+}
+
+/* Dark theme signup button hover */
+[data-theme="dark"] .signupBtn:hover {
+  background: #5a7fd8;
+}

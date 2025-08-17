@@ -1,15 +1,31 @@
 import { Form, useActionData, useNavigation, Link } from "react-router-dom";
 import { useFormik } from "formik";
 import { User, Mail, FileText, UserCheck } from "lucide-react";
-import PasswordInput from "../common/PasswordInput";
+import PasswordInput from "./PasswordInput";
 import styles from "./Signup.module.css";
+import Prompt from "../../UI/Prompt";
+import React from "react";
 
 const BIO_MAX = 200;
 
 const Signup = () => {
-  const actionData = useActionData(); 
+  const actionData = useActionData();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
+  const [prompt, setPrompt] = React.useState({ message: "", type: "info" });
+ 
+  
+  React.useEffect(() => {
+    if (actionData) {
+      if (actionData.error) {
+        setPrompt({ message: actionData.error, type: "error" });
+      } else if (actionData.success) {
+        setPrompt({ message: actionData.success, type: "success" });
+      } else {
+        setPrompt({ message: "", type: "info" });
+      }
+    }
+  }, [actionData]);
 
   const formik = useFormik({
     initialValues: {
@@ -32,11 +48,15 @@ const Signup = () => {
       if (!values.password || values.password.length < 6) {
         errors.password = "Password must be at least 6 characters";
       }
+      if (!values.bio || !values.bio.trim()) {
+        errors.bio = "Bio is required";
+      }
+      if (!values.role ) {
+        errors.role = "Role is required";
+      }
       return errors;
     },
-    onSubmit: () => {
-      // Let React Router handle the real submit
-    },
+    onSubmit: () => {}, // Let React Router handle the real submit
   });
 
   return (
@@ -45,8 +65,11 @@ const Signup = () => {
         <div className={styles.header}>
           <div className={styles.logo}>SS</div>
           <h2 className={styles.title}>SkillSwap</h2>
-          <p className={styles.subtitle}>Join our community and start your learning journey</p>
+          <p className={styles.subtitle}>
+            Join our community and start your learning journey
+          </p>
         </div>
+        <Prompt type={prompt.type} message={prompt.message} onClose={() => setPrompt({ message: "", type: "info" })} />
 
         <Form
           method="post"
@@ -122,6 +145,9 @@ const Signup = () => {
                 maxLength={BIO_MAX}
               />
             </div>
+            {formik.touched.bio && formik.errors.bio && (
+              <p className={styles.error}>{formik.errors.bio}</p>
+            )}
           </div>
 
           <div className={styles.field}>
@@ -135,12 +161,15 @@ const Signup = () => {
                 value={formik.values.role}
                 className={styles.inputWithIcon}
               >
-                <option value="learner">Select your role</option>
+                <option value="">Select your role</option>
                 <option value="learner">Learner</option>
                 <option value="teacher">Teacher</option>
                 <option value="dual">Both</option>
               </select>
             </div>
+            {formik.touched.role && formik.errors.role && (
+              <p className={styles.error}>{formik.errors.role}</p>
+            )}
           </div>
 
           <div className={styles.field}>
@@ -157,7 +186,10 @@ const Signup = () => {
               toggleButtonClass={styles.toggleVisibility}
             />
           </div>
-
+          {formik.touched.password && formik.errors.password && (
+            <p className={styles.error}>{formik.errors.password}</p>
+          )}
+         
           <div className={styles.field}>
             <label className={styles.label}>Confirm Password</label>
             <PasswordInput
@@ -174,32 +206,43 @@ const Signup = () => {
           </div>
 
           <div className={styles.termsRow}>
-            <input type="checkbox" name="terms" onChange={formik.handleChange} />
+            <input
+              type="checkbox"
+              name="terms"
+              onChange={formik.handleChange}
+            />
             <span>
-              I agree to the <a href="/" className={styles.link}>Terms of Service</a> and <a href="/" className={styles.link}>Privacy Policy</a>
+              I agree to the{" "}
+              <a href="/" className={styles.link}>
+                Terms of Service
+              </a>{" "}
+              and{" "}
+              <a href="/" className={styles.link}>
+                Privacy Policy
+              </a>
             </span>
           </div>
 
           {/* Validation and server errors */}
-          {formik.touched.password && formik.errors.password && (
-            <p className={styles.error}>{formik.errors.password}</p>
-          )}
-          {actionData?.error && (
-            <p className={styles.error}>{actionData.error}</p>
-          )}
 
-          <button className={styles.submitButton} type="submit" disabled={isSubmitting}>
+          <button
+            className={styles.submitButton}
+            type="submit"
+            disabled={isSubmitting}
+          >
             {isSubmitting ? "Creating Account..." : "Create Account"}
           </button>
 
           <div className={styles.divider}>
             <span className={styles.dividerText}>or sign up with</span>
           </div>
-          
 
           <div className={styles.footer}>
             Already have an account?
-            <Link to="/login" className={styles.signinLink}> Sign in</Link>
+            <Link to="/login" className={styles.signinLink}>
+              {" "}
+              Sign in
+            </Link>
           </div>
         </Form>
       </div>
