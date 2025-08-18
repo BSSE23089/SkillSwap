@@ -1,6 +1,6 @@
 import LoginForm from "../../components/Authentication/Login";
 import FormPageBackground from "../../components/Authentication/FormPageBackground";
-import {API_URL} from "../../config";
+import API_URL from "../../config/api";
 function LoginPage() {
   return (
     <FormPageBackground>

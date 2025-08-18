@@ -1,7 +1,7 @@
 import SignUpForm from "../../components/Authentication/Signup";
 import FormPageBackground from "../../components/Authentication/FormPageBackground";
 import { redirect } from "react-router-dom";
-import {API_URL} from "../../config";
+import API_URL from "../../config/api";
 function SignUpPage() {
   return (
     <FormPageBackground>
