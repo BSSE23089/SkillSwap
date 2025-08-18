@@ -5,7 +5,6 @@ import PasswordInput from "./PasswordInput";
 import styles from "./Signup.module.css";
 import Prompt from "../../UI/Prompt";
 import React from "react";
-
 const BIO_MAX = 200;
 
 const Signup = () => {

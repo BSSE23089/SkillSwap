@@ -2,14 +2,16 @@
 import styles from "./MainNavbar.module.css";
 import ThemeToggle from "./ThemeToggle";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutUser } from "../../store/authSlice"; // ✅ Import logout action
 
 const MainNavbar = ({ theme, onToggleTheme }) => {
-  const { user, logout } = useAuth();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.user); // ✅ Get user from Redux
 
   const handleLogout = async () => {
-    await logout();
+    await dispatch(logoutUser()); // ✅ Logout via Redux
     navigate("/login"); 
   };
 
@@ -17,16 +19,17 @@ const MainNavbar = ({ theme, onToggleTheme }) => {
     <nav className={styles.navbar}>
       <div className={styles.left}>
         <div className={styles.logo}>
-          <Link to='/dashboard' className={styles.logoIcon}>SS</Link>
-          <Link to='/dashboard' className={styles.logoText}>SkillSwap</Link>
+          <Link to="/dashboard" className={styles.logoIcon}>SS</Link>
+          <Link to="/dashboard" className={styles.logoText}>SkillSwap</Link>
         </div>
-        {user ? (
+
+        {user && (
           <ul className={styles.navLinks}>
             <li><Link to="/dashboard/discover">Discover</Link></li>
             <li><Link to="/dashboard/postSkill">+ Post Skill</Link></li>
             <li><Link to="/dashboard/mySkills">My Skills</Link></li>
           </ul>
-        ):(null)}
+        )}
       </div>
 
       <div className={styles.right}>

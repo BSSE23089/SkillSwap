@@ -1,15 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const userController = require("../controllers/userController");
+const { verifyToken } = require("../controllers/authController");
+const { getMe, updateProfile, updateSkills } = require("../controllers/userController");
+const { protect } = require("../middleware/authMiddleware");
 
-// Routes
-router.post("/signup", userController.signup);
-router.post("/login", userController.login);
-router.post("/logout", userController.logout);
+router.get("/me", protect, getMe);
 
-// Protected route
-router.get("/profile", userController.verifyToken, (req, res) => {
-  res.json({ message: "Welcome to your profile!", user: req.user });
-});
+// Update profile
+router.put("/:id", verifyToken, updateProfile);
+
+// Update skills
+router.put("/:id/skills", verifyToken, updateSkills);
 
 module.exports = router;

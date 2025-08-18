@@ -1,4 +1,3 @@
-// LoginForm.jsx
 import { useState, useEffect } from "react";
 import { Form, Link, useLocation, useNavigate, useActionData } from "react-router-dom";
 import { useFormik } from "formik";
@@ -6,27 +5,28 @@ import { Mail } from "lucide-react";
 import PasswordInput from "./PasswordInput";
 import classes from "./Login.module.css";
 import Prompt from "../../UI/Prompt";
-import { useAuth } from "../../context/AuthContext"; // Auth hook
+import { useDispatch } from "react-redux";
+import { loginSuccess as login } from "../../store/authSlice"; // ✅ correct redux import
 
 const LoginForm = () => {
   const actionData = useActionData();
   const location = useLocation();
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const dispatch = useDispatch();
 
   const [prompt, setPrompt] = useState({ message: "", type: "info" });
 
   // ✅ Handle successful login
   useEffect(() => {
     if (actionData?.success && actionData?.user) {
-      // Only store user in AuthContext
-      login(actionData.user);
+      // store user in Redux
+      dispatch(login(actionData.user));
 
       // Redirect to dashboard after short delay
       const timer = setTimeout(() => navigate("/dashboard"), 1000);
       return () => clearTimeout(timer);
     }
-  }, [actionData, navigate, login]);
+  }, [actionData, navigate, dispatch]);
 
   const formik = useFormik({
     initialValues: { email: "", password: "" },

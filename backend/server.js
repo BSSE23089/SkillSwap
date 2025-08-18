@@ -3,10 +3,6 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-
-const userRoutes = require("./routes/userRoutes");
-const statsRoutes = require("./routes/statsRoutes");
-
 dotenv.config();
 
 const app = express();
@@ -15,6 +11,9 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
+const authRoutes = require("./routes/authRoutes");
+const statsRoutes = require("./routes/statsRoutes");
+const userRoutes = require("./routes/userRoutes");
 // ✅ CORS setup
 const allowedOrigins = [
   "http://localhost:3000", 
@@ -37,8 +36,9 @@ app.use(
 );
 
 // Routes
-app.use("/api/users", userRoutes);
+app.use("/api/users", authRoutes);
 app.use("/api/stats", statsRoutes);
+app.use("/api/users", userRoutes);
 
 // MongoDB connection
 mongoose

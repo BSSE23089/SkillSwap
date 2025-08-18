@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { Link , useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./HeroSection.module.css";
 import { Typewriter } from "react-simple-typewriter";
-import { useAuth } from "../../context/AuthContext";
+import { useSelector } from "react-redux"; // ✅ Redux hook
 import Prompt from "../../UI/Prompt";
 
 const HeroSection = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const user = useSelector((state) => state.auth.user); // ✅ Get user from Redux
   const [prompt, setPrompt] = useState({ message: "", type: "info" });
 
   const phrases = [
@@ -26,18 +26,19 @@ const HeroSection = () => {
     if (!user) {
       e.preventDefault();
       setPrompt({ message: "⚠️ Please log in first!", type: "error" });
-      setTimeout(() => setPrompt({ message: "", type: "info" }), 2000);
-      setTimeout(() => navigate("/login"), 2000);
-     
+
+      // Clear after 2s and navigate
+      setTimeout(() => {
+        setPrompt({ message: "", type: "info" });
+        navigate("/login");
+      }, 2000);
     }
   };
 
   return (
     <div className={styles.heroWrapper}>
       <div className={styles.announcement}>
-        <span role="img" aria-label="rocket">
-          🚀
-        </span>{" "}
+        <span role="img" aria-label="rocket">🚀</span>{" "}
         Welcome to the future of skill sharing
       </div>
 
@@ -62,6 +63,7 @@ const HeroSection = () => {
           />
         </span>
       </h1>
+
       <p className={styles.heroDesc}>
         Connect with like-minded learners and teachers. Exchange your expertise
         and discover new passions in our vibrant community.
@@ -71,7 +73,7 @@ const HeroSection = () => {
         <Link
           to={user ? "/dashboard/discover" : "/login"}
           className={styles.startLearning}
-          onClick={handleLinkClick} 
+          onClick={handleLinkClick}
         >
           Start Learning →
         </Link>
@@ -79,7 +81,7 @@ const HeroSection = () => {
         <Link
           to={user ? "/dashboard/postSkill" : "/login"}
           className={styles.shareSkills}
-          onClick={handleLinkClick} 
+          onClick={handleLinkClick}
         >
           Share Your Skills
         </Link>
