@@ -1,7 +1,7 @@
 import SignUpForm from "../../components/Authentication/Signup";
 import FormPageBackground from "../../components/Authentication/FormPageBackground";
 import { redirect } from "react-router-dom";
-
+import {API_URL} from "../../config";
 function SignUpPage() {
   return (
     <FormPageBackground>
@@ -22,7 +22,7 @@ export async function action({ request }) {
   const role = formData.get("role");
 
   try {
-    const response = await fetch("http://localhost:5000/api/users/signup", {
+    const response = await fetch(`${API_URL}/api/users/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, email, password, bio, role })

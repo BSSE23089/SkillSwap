@@ -1,6 +1,6 @@
 import LoginForm from "../../components/Authentication/Login";
 import FormPageBackground from "../../components/Authentication/FormPageBackground";
-
+import {API_URL} from "../../config";
 function LoginPage() {
   return (
     <FormPageBackground>
@@ -17,20 +17,23 @@ export async function action({ request }) {
   const password = formData.get("password");
 
   try {
-    const response = await fetch("http://localhost:5000/api/users/login", {
-  method: "POST",
-  credentials: "include", // must match backend
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ email, password }),
-})
+    const response = await fetch(`${API_URL}/api/users/login`, {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+
     const data = await response.json();
     console.log("🔥 Backend response:", data);
 
     if (!response.ok) {
-      return { error: data?.error || "Could not authenticate user. Please try again." };
+      return {
+        error:
+          data?.error || "Could not authenticate user. Please try again.",
+      };
     }
 
-    // ✅ No need to store token in localStorage (cookie handles it)
     return data;
   } catch (error) {
     console.error("Login error:", error);
