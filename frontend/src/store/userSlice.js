@@ -10,9 +10,10 @@ const initialState = {
     teachingSessions: 0,
     learningSessions: 0,
     avatarUrl: "",
+    themePreference: "light", // ✅ add theme to user profile
   },
-  teachingSkills: [],   // 👈 added
-  learningSkills: [],   // 👈 added
+  teachingSkills: [],
+  learningSkills: [],
 };
 
 const userSlice = createSlice({
@@ -27,10 +28,10 @@ const userSlice = createSlice({
       state.profile.learningSessions = action.payload.learningSessions;
     },
     setTeachingSkills: (state, action) => {
-      state.teachingSkills = action.payload; // replace entire array
+      state.teachingSkills = action.payload;
     },
     setLearningSkills: (state, action) => {
-      state.learningSkills = action.payload; // replace entire array
+      state.learningSkills = action.payload;
     },
     addTeachingSkill: (state, action) => {
       state.teachingSkills.push(action.payload);
@@ -48,6 +49,9 @@ const userSlice = createSlice({
         (skill) => skill.id !== action.payload
       );
     },
+    setThemePreference: (state, action) => {
+      state.profile.themePreference = action.payload; // ✅ reducer for theme
+    },
   },
 });
 
@@ -60,6 +64,7 @@ export const {
   addLearningSkill,
   removeTeachingSkill,
   removeLearningSkill,
+  setThemePreference,
 } = userSlice.actions;
 
 export default userSlice.reducer;

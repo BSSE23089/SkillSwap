@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import styles from "./HeroSection.module.css";
 import { Typewriter } from "react-simple-typewriter";
 import { useSelector } from "react-redux"; // ✅ Redux hook
 import Prompt from "../../UI/Prompt";
-
+import Button from "../../UI/Button"; // Import Button component
+import Text from "../../UI/Text"; // Import Text component
 const HeroSection = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.user); // ✅ Get user from Redux
@@ -38,8 +39,12 @@ const HeroSection = () => {
   return (
     <div className={styles.heroWrapper}>
       <div className={styles.announcement}>
-        <span role="img" aria-label="rocket">🚀</span>{" "}
+        <span role="img" aria-label="rocket">
+          🚀
+        </span>{" "}
+      <Text className={styles.announcementText}>
         Welcome to the future of skill sharing
+      </Text>
       </div>
 
       <Prompt
@@ -70,21 +75,21 @@ const HeroSection = () => {
       </p>
 
       <div className={styles.heroButtons}>
-        <Link
+        <Button
           to={user ? "/dashboard/discover" : "/login"}
-          className={styles.startLearning}
           onClick={handleLinkClick}
+          variant="startLearning"
         >
           Start Learning →
-        </Link>
+        </Button>
 
-        <Link
+        <Button
           to={user ? "/dashboard/postSkill" : "/login"}
-          className={styles.shareSkills}
           onClick={handleLinkClick}
+          variant="shareSkills"
         >
           Share Your Skills
-        </Link>
+        </Button>
       </div>
     </div>
   );

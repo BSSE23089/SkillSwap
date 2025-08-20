@@ -27,7 +27,14 @@ const updateProfile = async (req, res) => {
       return res.status(403).json({ success: false, error: "Unauthorized" });
     }
 
-    const { name, bio, location, avatarUrl, role, themePreference } = req.body;
+    const { name, bio, location, role, themePreference } = req.body;
+    let {avatarUrl} = req.body;
+
+    // ✅ If file uploaded, set avatar path correctly
+   if (req.file) {
+  avatarUrl = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
+}
+
 
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
@@ -41,6 +48,7 @@ const updateProfile = async (req, res) => {
     res.status(500).json({ success: false, error: "Server error" });
   }
 };
+
 
 // =============================
 // @desc   Update user skills

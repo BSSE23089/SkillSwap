@@ -1,12 +1,13 @@
 import React from 'react';
 import { Clock, Users } from 'lucide-react';
 import styles from './SkillCard.module.css';
-
+import Button from '../../UI/Button';
+import Text from '../../UI/Text'; // Assuming you have a Text component for consistent styling
 const SkillCard = ({ skill, type }) => {
   return (
     <div className={styles.card}>
       <div className={styles.header}>
-        <h3 className={styles.title}>{skill.title}</h3>
+        <Text className={styles.title}>{skill.title}</Text>
         <span
           className={`${styles.badge} ${
             type === 'teaching' ? styles.teachingBadge : styles.learningBadge
@@ -16,7 +17,7 @@ const SkillCard = ({ skill, type }) => {
         </span>
       </div>
 
-      <p className={styles.description}>{skill.description}</p>
+      <Text className={styles.description}>{skill.description}</Text>
 
       <div className={styles.tags}>
         {skill.tags.map((tag, index) => (
@@ -30,18 +31,18 @@ const SkillCard = ({ skill, type }) => {
         <div className={styles.metadataLeft}>
           <div className={styles.metadataItem}>
             <Clock className="w-4 h-4" />
-            <span>{skill.duration}</span>
+            <Text>{skill.duration}</Text>
           </div>
           <div className={styles.metadataItem}>
             <Users className="w-4 h-4" />
-            <span>{skill.studentCount} students</span>
+            <Text>{skill.studentCount} students</Text>
           </div>
         </div>
       </div>
 
-      <button className={styles.requestBtn}>
+      <Button className={styles.requestBtn}>
         Request Session
-      </button>
+      </Button>
     </div>
   );
 };

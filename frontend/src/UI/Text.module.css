@@ -1,0 +1,13 @@
+.text {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 4px 0;
+  padding: 2px 4px;
+  color: black; /* blue-600 for light mode */
+  display: inline-block;
+}
+
+/* Dark Theme */
+[data-theme="dark"] .text {
+  color: white; /* blue-400 for dark mode */
+}

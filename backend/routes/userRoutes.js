@@ -1,15 +1,13 @@
-const express = require("express");
-const router = express.Router();
-const { verifyToken } = require("../controllers/authController");
 const { getMe, updateProfile, updateSkills } = require("../controllers/userController");
+const express = require("express");
 const { protect } = require("../middleware/authMiddleware");
+const upload = require("../middleware/uploadMiddleware"); // ✅ import middleware
 
+const router = express.Router();
+
+// Routes
 router.get("/me", protect, getMe);
-
-// Update profile
-router.put("/:id", verifyToken, updateProfile);
-
-// Update skills
-router.put("/:id/skills", verifyToken, updateSkills);
+router.put("/:id", protect, upload.single("avatar"), updateProfile);
+router.put("/:id/skills", protect, updateSkills);
 
 module.exports = router;
