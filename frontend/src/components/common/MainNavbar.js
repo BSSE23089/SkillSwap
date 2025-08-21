@@ -3,12 +3,12 @@ import styles from "./MainNavbar.module.css";
 import ThemeToggle from "./ThemeToggle";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutUser } from "../../store/authSlice"; // ✅ Import logout action
+import { logoutUser } from "../../store/authSlice"; 
 
 const MainNavbar = ({ theme, onToggleTheme }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector((state) => state.auth.user); // ✅ Get user from Redux
+  const user = useSelector((state) => state.auth.user); 
 
   const handleLogout = async () => {
     await dispatch(logoutUser()); // ✅ Logout via Redux

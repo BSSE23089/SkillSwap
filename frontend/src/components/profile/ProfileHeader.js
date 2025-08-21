@@ -1,12 +1,13 @@
 import { Star, MapPin, Calendar, MessageCircle, Users, Edit3 } from "lucide-react";
 import { useState } from "react";
 import styles from "./ProfileHeader.module.css";
+import Overlay from '../../UI/Overlay';
 import Card from "../../UI/Card";
 import Button from "../../UI/Button";
 import Avatar from "../common/Avatar";
 import Text from "../../UI/Text";
 import EditDetailsForm from "../common/EditProfileForm";
-import Overlay from '../../UI/Overlay';
+
 const ProfileHeader = ({ user, onUserUpdate }) => {
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
 

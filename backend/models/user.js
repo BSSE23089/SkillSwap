@@ -9,7 +9,7 @@ const userSchema = new Schema(
     bio: { type: String, required: true },
     location: String,
     avatarUrl: String,
-    role: [{ type: String, enum: ["learner", "teacher", "dual"], required: true }],
+    role: [{ type: String, enum: ["learner", "teacher"], required: true }],
     rating: Number,
     themePreference: { type: String, enum: ["light", "dark"], default: "light" },
     skillsTeach: [{ type: Schema.Types.ObjectId, ref: "Skill" }],
@@ -21,5 +21,5 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 
-// ✅ Prevent OverwriteModelError
+
 module.exports = mongoose.models.User || mongoose.model("User", userSchema);

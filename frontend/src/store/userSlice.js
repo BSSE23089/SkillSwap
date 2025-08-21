@@ -10,7 +10,7 @@ const initialState = {
     teachingSessions: 0,
     learningSessions: 0,
     avatarUrl: "",
-    themePreference: "light", // ✅ add theme to user profile
+    themePreference: "light",
   },
   teachingSkills: [],
   learningSkills: [],
@@ -41,16 +41,16 @@ const userSlice = createSlice({
     },
     removeTeachingSkill: (state, action) => {
       state.teachingSkills = state.teachingSkills.filter(
-        (skill) => skill.id !== action.payload
+        (skill) => skill._id !== action.payload
       );
     },
     removeLearningSkill: (state, action) => {
       state.learningSkills = state.learningSkills.filter(
-        (skill) => skill.id !== action.payload
+        (skill) => skill._id !== action.payload
       );
     },
     setThemePreference: (state, action) => {
-      state.profile.themePreference = action.payload; // ✅ reducer for theme
+      state.profile.themePreference = action.payload;
     },
   },
 });
