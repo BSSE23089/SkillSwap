@@ -1,0 +1,70 @@
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = {
+  profile: {
+    name: "",
+    bio: "",
+    location: "",
+    rating: 0,
+    reviewsCount: 0,
+    teachingSessions: 0,
+    learningSessions: 0,
+    avatarUrl: "",
+    themePreference: "light",
+  },
+  teachingSkills: [],
+  learningSkills: [],
+};
+
+const userSlice = createSlice({
+  name: "user",
+  initialState,
+  reducers: {
+    setUserProfile: (state, action) => {
+      state.profile = { ...state.profile, ...action.payload };
+    },
+    updateStats: (state, action) => {
+      state.profile.teachingSessions = action.payload.teachingSessions;
+      state.profile.learningSessions = action.payload.learningSessions;
+    },
+    setTeachingSkills: (state, action) => {
+      state.teachingSkills = action.payload;
+    },
+    setLearningSkills: (state, action) => {
+      state.learningSkills = action.payload;
+    },
+    addTeachingSkill: (state, action) => {
+      state.teachingSkills.push(action.payload);
+    },
+    addLearningSkill: (state, action) => {
+      state.learningSkills.push(action.payload);
+    },
+    removeTeachingSkill: (state, action) => {
+      state.teachingSkills = state.teachingSkills.filter(
+        (skill) => skill._id !== action.payload
+      );
+    },
+    removeLearningSkill: (state, action) => {
+      state.learningSkills = state.learningSkills.filter(
+        (skill) => skill._id !== action.payload
+      );
+    },
+    setThemePreference: (state, action) => {
+      state.profile.themePreference = action.payload;
+    },
+  },
+});
+
+export const {
+  setUserProfile,
+  updateStats,
+  setTeachingSkills,
+  setLearningSkills,
+  addTeachingSkill,
+  addLearningSkill,
+  removeTeachingSkill,
+  removeLearningSkill,
+  setThemePreference,
+} = userSlice.actions;
+
+export default userSlice.reducer;

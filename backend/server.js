@@ -3,18 +3,21 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-
-const userRoutes = require("./routes/userRoutes");
-const statsRoutes = require("./routes/statsRoutes");
-
 dotenv.config();
 
+const path = require("path");
 const app = express();
 
 // Middleware
-app.use(express.json());
-app.use(cookieParser());
 
+app.use(cookieParser());
+app.use(express.json({ limit: "1mb" })); 
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+
+const authRoutes = require("./routes/authRoutes");
+const statsRoutes = require("./routes/statsRoutes");
+const userRoutes = require("./routes/userRoutes");
 // ✅ CORS setup
 const allowedOrigins = [
   "http://localhost:3000", 
@@ -37,14 +40,19 @@ app.use(
 );
 
 // Routes
-app.use("/api/users", userRoutes);
+app.use("/api/users", authRoutes);
 app.use("/api/stats", statsRoutes);
+app.use("/api/users", userRoutes);
 
 // MongoDB connection
-mongoose
-  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("✅ MongoDB connected"))
-  .catch((err) => console.error("❌ MongoDB connection error:", err));
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 30000, // 30s instead of 51s default
+  socketTimeoutMS: 45000,         // Allow sockets to stay open longer
+})
+.then(() => console.log("MongoDB Connected"))
+.catch(err => console.error("MongoDB Connection Error:", err));
 
 // Start server
 const PORT = process.env.PORT || 5000;

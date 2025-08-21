@@ -1,0 +1,232 @@
+.skill-form-container {
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  background-color: #f8fafc;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative; /* 🔹 Needed for absolute child */
+}
+
+.skill-form-card {
+  position: sticky; /* 🔹 Now it’s out of normal flow */
+  top: 50%;           /* Center vertically */
+  left: 20%;          /* Center horizontally */
+  width: 100%;
+  max-width: 600px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+
+.skill-form-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+[data-theme="dark"] label {
+  color: white;
+}
+.skill-form-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #3b82f6;
+}
+[data-theme="dark"] .skill-form-icon {
+  color: #76a1f6; /* blue-500 for dark mode */
+}
+
+.skill-form-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+[data-theme="dark"] .skill-form-title {
+  color: #e5e7eb; 
+}
+
+.role-selection-section {
+  margin-bottom: 1.5rem;
+}
+
+.role-selection-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.role-radio-group {
+  display: flex;
+  gap: 1rem;
+}
+
+.role-radio-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.role-radio-input {
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+  accent-color: #3178ea;
+}
+[data-theme="dark"] .role-radio-input {
+  accent-color: #6791E4; /* blue-500 for dark mode */
+}
+
+.role-radio-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #4284ee;
+}
+[data-theme="dark"] .role-radio-icon {
+  color: #729ef4; /* blue-500 for dark mode */
+}
+.role-radio-text {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.skill-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-field-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+.form-text-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  background: #ffffff;
+  color: #1f2937;
+  transition: all 0.2s;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.form-textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  background: #ffffff;
+  color: #1f2937;
+  transition: all 0.2s;
+  resize: vertical;
+  min-height: 100px;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.form-select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  background: #ffffff;
+  color: #1f2937;
+  transition: all 0.2s;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.75rem center;
+  background-repeat: no-repeat;
+  background-size: 1.25em 1.25em;
+  padding-right: 2.5rem;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.form-two-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 0.875rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  background: #3b82f6;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 1rem;
+}
+
+.error-message {
+  color: #ef4444;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}
+
+.tags-section {
+  position: relative;
+}
+
+.tag-input-container {
+  margin-top: 10px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.tag-add-button {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  color: #6b7280;
+  transition: all 0.2s;
+
+}
+[data-theme="dark"] input {
+  background-color: #0f141b;
+  border: #0f141b;
+  color: white;
+}
+[data-theme="dark"] select {
+  background-color: #0f141b;
+  border: #0f141b;
+  color: white;
+}
+[data-theme="dark"] textarea {
+  background-color: #0f141b;
+  border: #0f141b;
+  color: white;
+}

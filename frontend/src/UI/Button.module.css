@@ -1,0 +1,49 @@
+.Button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 32px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(80, 120, 200, 0.08);
+  transition: background 0.2s, transform 0.15s;
+}
+
+/* Variations */
+.startLearning {
+  background: #2B6CEE;
+  color: #fff;
+}
+.startLearning:hover {
+  background: #1f56c7; /* darker blue */
+  transform: translateY(-2px);
+}
+
+[data-theme="dark"] .startLearning {
+  background: #6791E4;
+}
+[data-theme="dark"] .startLearning:hover {
+  background: #4f76cf;
+}
+
+/* Secondary button */
+.shareSkills {
+  background: #f4f4f4;
+  color: #2B6CEE;
+}
+.shareSkills:hover {
+  background: #e0e0e0; /* subtle darker gray */
+  transform: translateY(-2px);
+}
+
+[data-theme="dark"] .shareSkills {
+  background: #333;
+  color: #fff;
+}
+[data-theme="dark"] .shareSkills:hover {
+  background: #444; /* slightly lighter for dark mode */
+}

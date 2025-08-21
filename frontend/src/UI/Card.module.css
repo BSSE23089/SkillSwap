@@ -1,0 +1,46 @@
+.Card {
+  background: #fff;
+  color: #222;
+  border-radius: 16px; /* Bigger corners */
+  padding: 36px; /* More padding */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  max-width: 480px; /* Wider card */
+  margin: 20px auto; /* Centered with spacing */
+}
+
+/* Dark theme override */
+[data-theme="dark"] .Card {
+  background: #161f2e;
+  color: #f5f5f5;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* Card header */
+.Card-header {
+  font-size: 1.6rem; /* Bigger header */
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+/* Card body */
+.Card-body {
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+/* Card footer */
+.Card-footer {
+  margin-top: 20px;
+  font-size: 1rem;
+  opacity: 0.85;
+}
+
+.Card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+[data-theme="dark"] .Card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.65);
+}

@@ -11,9 +11,8 @@
 
 .announcement {
   background: #E5EDFE;
-  color: #112788;
-  font-weight: 500;
-  font-size: 1.05rem;
+  
+
   border-radius: 18px;
   padding: 7px 22px;
   margin-bottom: 22px;
@@ -21,13 +20,17 @@
   box-shadow: 0 2px 8px rgba(80, 120, 200, 0.04);
   transition: background 0.3s ease, color 0.3s ease;
 }
-
+.announcementText{
+  font-weight: 500;
+  font-size: 1.05rem;
+}
 /* Dark theme announcement */
 [data-theme="dark"] .announcement {
   background: #1a2332;
   color: #6791E4;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
+
 
 .heroTitle {
   font-size: 3.2rem;

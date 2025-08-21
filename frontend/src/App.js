@@ -6,7 +6,7 @@ import DashboardHome from "./pages/Dashboard/DashboardHome";
 import Discover from "./pages/Discover/Discover";
 import PostSkill from "./pages/PostSkill/PostSkill";
 import ProfilePage from "./pages/Profile/ProfilePage"; 
-import { AuthProvider } from "./context/AuthContext";
+
 
 function App() {
   const router = createBrowserRouter([
@@ -25,9 +25,9 @@ function App() {
   ]);
 
   return (
-    <AuthProvider>
+   
       <RouterProvider router={router} />
-    </AuthProvider>
+   
   );
 }
 

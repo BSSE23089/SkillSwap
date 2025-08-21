@@ -1,15 +1,13 @@
+const { getMe, updateProfile, updateSkills } = require("../controllers/userController");
 const express = require("express");
+const { protect } = require("../middleware/authMiddleware");
+const upload = require("../middleware/uploadMiddleware"); // ✅ import middleware
+
 const router = express.Router();
-const userController = require("../controllers/userController");
 
 // Routes
-router.post("/signup", userController.signup);
-router.post("/login", userController.login);
-router.post("/logout", userController.logout);
-
-// Protected route
-router.get("/profile", userController.verifyToken, (req, res) => {
-  res.json({ message: "Welcome to your profile!", user: req.user });
-});
+router.get("/me", protect, getMe);
+router.put("/:id", protect, upload.single("avatar"), updateProfile);
+router.put("/:id/skills", protect, updateSkills);
 
 module.exports = router;

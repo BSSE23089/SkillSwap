@@ -1,36 +1,157 @@
+/* SkillsTabNavigation.module.css */
+
 .container {
   display: flex;
-  background-color: #f3f4f6;
   border-radius: 20px;
   padding: 4px;
   margin-bottom: 24px;
+  max-width: 100%;
+  width: 100%;
 }
 
 .tab {
   flex: 1;
-  padding: 8px 16px;
-  border-radius: 12px;
-  font-size: 14px;
+  padding: 14px 24px;
+  border-radius: 16px;
+  font-size: 15px;
   font-weight: 500;
-  transition: all 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
   border: none;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  min-height: 50px;
 }
 
+/* Base styles - will be overridden by theme-specific styles */
 .tabActive {
-  background-color: white;
-  color: #111827;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
+}
+
+.tabActive:hover {
+  transform: translateY(-2px);
 }
 
 .tabInactive {
-  color: #6b7280;
+  background: transparent;
+}
+
+.tabInactive:hover {
+  transform: translateY(-0.5px);
+}
+
+.tabInactive:focus {
+  outline: 2px solid rgba(59, 130, 246, 0.5);
+  outline-offset: 2px;
+}
+
+.tabActive:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+}
+
+/* Icon styling within tabs */
+.tab svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.3s ease;
+}
+
+.tabActive svg {
+  transform: scale(1.1);
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+  .container {
+    padding: 3px;
+    border-radius: 16px;
+  }
+  
+  .tab {
+    padding: 10px 16px;
+    font-size: 13px;
+    gap: 6px;
+    border-radius: 13px;
+  }
+}
+
+/* Alternative minimal style variant */
+.container.minimal {
+  background: transparent;
+  border: 1px solid #334155;
+  padding: 2px;
+}
+
+.minimal .tabActive {
+  background: #334155;
+  box-shadow: none;
+  transform: none;
+}
+
+.minimal .tabActive:hover {
+  background: #475569;
+}
+
+/* Glassmorphism variant */
+.container.glass {
+  background: rgba(30, 41, 59, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Light theme (default) */
+.container {
+  background: #f8fafc;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.tabActive {
+  background: linear-gradient(135deg, #3b82f6 0%, #6b9dee);
+  color: white;
+  box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.39);
+  transform: translateY(-1px);
+}
+
+.tabInactive {
+  color: #64748b;
 }
 
 .tabInactive:hover {
   color: #374151;
+  background: rgba(59, 130, 246, 0.1);
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .container {
+  background: #1e293b;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .tabActive {
+  background: linear-gradient(135deg, #6499ef 0%, #5a96f5);
+  color: white;
+  box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.39);
+  transform: translateY(-1px);
+}
+
+[data-theme="dark"] .tabActive:hover {
+  background: linear-gradient(135deg, #4e83f7 0%, #5491f3);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px 0 rgba(59, 130, 246, 0.45);
+}
+
+[data-theme="dark"] .tabInactive {
+  color: #bac2d1;
+}
+
+[data-theme="dark"] .tabInactive:hover {
+  color: #cbd5e1;
+  background: rgba(186, 194, 209, 0.1);
+  transform: translateY(-0.5px);
 }

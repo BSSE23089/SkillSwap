@@ -1,4 +1,4 @@
-const User = require("./User");
+const User = require("./user");
 const Skill = require("./Skill");
 const Request = require("./Request");
 const Message = require("./Message");
